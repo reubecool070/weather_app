@@ -2,11 +2,15 @@
 
 # dependencies
 /node_modules
+/backend_api/node_modules
 /.pnp
 .pnp.js
 
+package-lock.json
+
 # testing
 /coverage
+
 
 # production
 /build
