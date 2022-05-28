@@ -3,7 +3,7 @@ import React from 'react'
 function Header() {
     return (
         <div className="topbar">
-            <nav className="navbar top-navbar navbar-expand-md navbar-light">
+            <nav className="navbar top-navbar navbar-expand-md navbar-light px-3">
                 <div className="d-flex align-items-center">
                     <span
                         className="font-18 ml-3 d-lg-none"
@@ -26,42 +26,6 @@ function Header() {
                             />
                         </div>
                     </div>
-                </div>
-
-                <div
-                    className="navbar-collapse collapse justify-content-end"
-                    id="navbarSupportedContent"
-                >
-                    <ul className="navbar-nav float-right d-flex align-items-center">
-                        <li className="nav-item">
-                            <span
-                                data-tip
-                                data-for="Email"
-                                id="floatingChatsSideBarHandler"
-                                className="nav-link text-gray-300"
-                                style={{ position: 'relative' }}
-                            />
-                        </li>
-
-                        <li className="nav-item nav-item-image pointer">
-                            <span className="d-flex align-items-center nav-link">
-                                <div className="avatar-circle">
-                                    <img
-                                        src=""
-                                        className="avatar-circle__image rounded-circle"
-                                        alt=""
-                                        width="30"
-                                    />
-                                </div>
-                                <span className="ml-2">
-                                    Hi,
-                                    <span className="ml-1 font-medium text-dark text-capitalize">
-                                        Reuben Thapa
-                                    </span>
-                                </span>
-                            </span>
-                        </li>
-                    </ul>
                 </div>
             </nav>
         </div>

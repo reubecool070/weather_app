@@ -3,6 +3,7 @@ import moment from 'moment'
 import sky from '../assets/images/clear_sky.jpg'
 import rainy from '../assets/images/rainy.jpg'
 import sunny from '../assets/images/sunny.jpg'
+import ToggleSwitch from './toggle'
 
 function Sidebar() {
     const todayDate = moment().format('dddd, LL | h:m')
@@ -11,17 +12,21 @@ function Sidebar() {
         { id: 1, name: 'Rainy Sky', image: rainy },
         { id: 1, name: 'Sunny Sky', image: sunny },
     ]
+
+    const toggleActivityEnabled = (value: boolean) => {
+        console.log(value)
+    }
     return (
         <div>
             <aside
-                className="left-sidebar ishovered"
+                className="left-sidebar ishovered justify-content-center"
                 style={{
                     background: `url(${weatherBackground[2].image})`,
                     backgroundSize: 'cover',
                 }}
             >
                 <nav className="sidebar-nav ">
-                    <div className="d-flex text-center text-white align-items-center justify-content-center">
+                    <div className="d-flex text-center text-white align-items-center ">
                         <h2
                             className="mt-3 display-4"
                             style={{ fontWeight: 600 }}
@@ -38,7 +43,7 @@ function Sidebar() {
                                 <div className="row d-flex h-100">
                                     <div className="col-md-12 col-lg-12 col-xl-12">
                                         <div
-                                            className="card  shadow-5"
+                                            className="card shadow-5"
                                             style={{
                                                 color: '#4B515D',
                                                 borderRadius: '35px',
@@ -121,6 +126,40 @@ function Sidebar() {
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="mt-3">
+                                    <div
+                                        className="card text-center"
+                                        style={{
+                                            color: '#4B515D',
+                                            borderRadius: '35px',
+                                        }}
+                                    >
+                                        <div
+                                            className="card-body d-flex flex-row 
+                                            justify-content-center align-items-center"
+                                        >
+                                            <span className="display-5 px-2">
+                                                °C
+                                            </span>
+                                            <div className="px-2">
+                                                <ToggleSwitch
+                                                    theme="graphite-small"
+                                                    className="d-flex"
+                                                    value={false}
+                                                    onStateChanged={(key) =>
+                                                        toggleActivityEnabled(
+                                                            key
+                                                        )
+                                                    }
+                                                />
+                                            </div>
+
+                                            <span className="display-5 px-2">
+                                                °F
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
