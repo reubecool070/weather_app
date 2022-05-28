@@ -1,24 +1,44 @@
 import React from 'react'
 import moment from 'moment'
+import sky from '../assets/images/clear_sky.jpg'
+import rainy from '../assets/images/rainy.jpg'
+import sunny from '../assets/images/sunny.jpg'
 
 function Sidebar() {
     const todayDate = moment().format('dddd, LL | h:m')
-    // const todayDateTime = moment().format('HH:MM A')
-    console.log(todayDate)
+    const weatherBackground = [
+        { id: 1, name: 'Clear Sky', image: sky },
+        { id: 1, name: 'Rainy Sky', image: rainy },
+        { id: 1, name: 'Sunny Sky', image: sunny },
+    ]
     return (
         <div>
-            <aside className="left-sidebar ishovered shadow-5">
+            <aside
+                className="left-sidebar ishovered"
+                style={{
+                    background: `url(${weatherBackground[2].image})`,
+                    backgroundSize: 'cover',
+                }}
+            >
                 <nav className="sidebar-nav ">
                     <div className="d-flex text-center text-white align-items-center justify-content-center">
-                        <span className="navbar-brand mt-3">Today Weather</span>
+                        <h2
+                            className="mt-3 display-4"
+                            style={{ fontWeight: 600 }}
+                        >
+                            Today Weather
+                        </h2>
                     </div>
-                    <div id="sidebarnav" className="sidebar-content">
-                        <section className="vh-100">
+                    <div
+                        id="sidebarnav"
+                        className="sidebar-content align-items-center justify-content-center"
+                    >
+                        <section className="">
                             <div className="container py-5 h-100">
-                                <div className="row d-flex justify-content-center align-items-center h-100">
+                                <div className="row d-flex h-100">
                                     <div className="col-md-12 col-lg-12 col-xl-12">
                                         <div
-                                            className="card"
+                                            className="card  shadow-5"
                                             style={{
                                                 color: '#4B515D',
                                                 borderRadius: '35px',
