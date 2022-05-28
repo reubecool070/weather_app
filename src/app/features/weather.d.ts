@@ -1,3 +1,3 @@
 export interface WeatherState {
-  weather: "string";
+    weather: 'string'
 }

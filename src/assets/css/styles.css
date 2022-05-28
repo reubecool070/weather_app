@@ -1,0 +1,32 @@
+#mainbar {
+    width: 100%;
+}
+
+#mainbar .topbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.topbar {
+    background: #fff;
+    height: 60px;
+    position: relative;
+    transition: 0.2s ease-in;
+    z-index: 12;
+}
+.left-sidebar {
+    background: #377df6;
+    height: 100vh;
+    left: 0;
+    padding-top: 0;
+    position: fixed;
+    top: 0;
+    transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.4s;
+    width: 325px;
+    z-index: 51;
+}
+
+.shadow-5 {
+    box-shadow: 0px 15px 35px rgba(20, 28, 52, 0.2);
+}
