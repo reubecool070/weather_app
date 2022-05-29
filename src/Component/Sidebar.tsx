@@ -5,31 +5,27 @@ import ToggleSwitch from './toggle'
 import { useAppDispatch, useAppSelector } from '../app/hook'
 import getWeathers from '../app/features/weatherApi'
 import { Wind } from '../assets/icons'
+import { changemetric } from '../app/features/unitSlice'
+import { CoordinatesTypes } from './types'
 
-interface SidebarPropsI {
-    coordinates: {
-        latitude: number
-        longitude: number
-    } | null
-}
-
-function Sidebar(props: SidebarPropsI) {
-    const { coordinates } = props
+function Sidebar(props: CoordinatesTypes) {
+    const { lat, lon } = props
     const dispatch = useAppDispatch()
     const { weather } = useAppSelector((state) => state.weather)
-    console.log(weather)
+    const { units } = useAppSelector((state) => state.units)
 
     useEffect(() => {
-        if (coordinates) {
-            dispatch(getWeathers(coordinates))
+        if (lat && lon) {
+            dispatch(getWeathers({ lat, lon, units }))
         }
-    }, [coordinates])
+    }, [lat, lon, units])
 
     const todayDate = moment().format('dddd, LL | h:m')
 
-    const toggleActivityEnabled = (value: boolean) => {
-        console.log(value)
+    const toggleActivityEnabled = () => {
+        dispatch(changemetric())
     }
+
     return (
         <aside
             className="left-sidebar ishovered justify-content-center"
@@ -65,7 +61,7 @@ function Sidebar(props: SidebarPropsI) {
                                             borderRadius: '35px',
                                         }}
                                     >
-                                        {coordinates ? (
+                                        {lat && lon ? (
                                             <div className="card-body p-4">
                                                 <div className="d-flex justify-content-center">
                                                     <h6>{todayDate}</h6>
@@ -196,8 +192,8 @@ function Sidebar(props: SidebarPropsI) {
                                                 theme="graphite-small"
                                                 className="d-flex"
                                                 value={false}
-                                                onStateChanged={(key) =>
-                                                    toggleActivityEnabled(key)
+                                                onStateChanged={() =>
+                                                    toggleActivityEnabled()
                                                 }
                                             />
                                         </div>

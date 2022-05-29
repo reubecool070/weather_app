@@ -4,7 +4,7 @@ import '../assets/css/toogle.css'
 
 interface PropsI {
     // onClick: () => void
-    onStateChanged: (key: boolean) => void
+    onStateChanged: () => void
     theme: string
     value: boolean
     className: string
@@ -14,15 +14,12 @@ function ToggleSwitch(props: PropsI) {
     const { onStateChanged, theme, className, value } = props
     const [enabled, setEnabled] = useState(value)
 
-    const toogleSwitch = (evt: any) => {
+    const toogleSwitch = (evt: React.SyntheticEvent<EventTarget>) => {
         evt.persist()
         evt.preventDefault()
         setEnabled(!enabled)
 
-        const switchEvent = Object.assign(evt, { SWITCH_STATE: enabled })
-        // Execute the callback functions
-        // onClick(switchEvent)
-        onStateChanged(enabled)
+        onStateChanged()
     }
 
     const switchTheme = theme && typeof theme === 'string' ? theme : 'default'

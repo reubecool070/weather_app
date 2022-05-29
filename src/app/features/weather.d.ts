@@ -1,6 +1,7 @@
 export interface WeatherPayloadState {
-    latitude: number
-    longitude: number
+    lat: number
+    lon: number
+    units: string
 }
 export interface WeatherDataState {
     coord: {

@@ -15,11 +15,12 @@ exports.weather = asyncHandler(async (req, res, next) => {
         return next(new ErrorResponse(errorMessages, 400))
     }
 
-    const { city, lat, lon } = req.query
+    const { city, lat, lon, units } = req.query
+
     if (city) {
-        url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.WEATHER_API_KEY}`
+        url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.WEATHER_API_KEY}&units=${units}`
     } else if (lat && lon) {
-        url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&units=metric&lon=${lon}&appid=${process.env.WEATHER_API_KEY}`
+        url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.WEATHER_API_KEY}&units=${units}`
     }
 
     const response = await axios.get(url)
