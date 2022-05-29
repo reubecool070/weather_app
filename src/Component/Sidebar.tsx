@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
 import moment from 'moment'
-import sky from '../assets/images/clear_sky.jpg'
-import rainy from '../assets/images/rainy.jpg'
-import sunny from '../assets/images/sunny.jpg'
+import { weatherBackground } from './weatherImages'
 import ToggleSwitch from './toggle'
 import { useAppDispatch, useAppSelector } from '../app/hook'
 import getWeathers from '../app/features/weatherApi'
@@ -28,11 +26,6 @@ function Sidebar(props: SidebarPropsI) {
     }, [coordinates])
 
     const todayDate = moment().format('dddd, LL | h:m')
-    const weatherBackground = [
-        { id: 1, name: 'Clear Sky', image: sky },
-        { id: 1, name: 'Rainy Sky', image: rainy },
-        { id: 1, name: 'Sunny Sky', image: sunny },
-    ]
 
     const toggleActivityEnabled = (value: boolean) => {
         console.log(value)
@@ -41,7 +34,13 @@ function Sidebar(props: SidebarPropsI) {
         <aside
             className="left-sidebar ishovered justify-content-center"
             style={{
-                background: `url(${weatherBackground[1].image})`,
+                background: `url(${
+                    weatherBackground.find(
+                        (item) =>
+                            weather &&
+                            item.name.includes(weather?.weather[0]?.main)
+                    )?.image
+                })`,
                 backgroundSize: 'cover',
             }}
         >
@@ -66,92 +65,114 @@ function Sidebar(props: SidebarPropsI) {
                                             borderRadius: '35px',
                                         }}
                                     >
-                                        <div className="card-body p-4">
-                                            <div className="d-flex justify-content-center">
-                                                <h6>{todayDate}</h6>
-                                            </div>
-                                            <div className="d-flex flex-column text-center mt-2 mb-4">
-                                                <span className="display-6">
-                                                    {weather?.name}
-                                                </span>
-                                                <h6
-                                                    className="display-4 mb-0 font-weight-bold"
-                                                    style={{
-                                                        color: '#1C2331',
-                                                    }}
-                                                >
-                                                    {weather?.main.temp} &deg;C
-                                                    <br />
-                                                </h6>
-                                                <span
-                                                    className="small"
-                                                    style={{
-                                                        color: '#868B94',
-                                                    }}
-                                                >
-                                                    {weather?.weather[0]?.main}
-                                                </span>
-                                            </div>
+                                        {coordinates ? (
+                                            <div className="card-body p-4">
+                                                <div className="d-flex justify-content-center">
+                                                    <h6>{todayDate}</h6>
+                                                </div>
+                                                <div className="d-flex flex-column text-center mt-2 mb-4">
+                                                    <span className="display-6">
+                                                        {weather?.name}
+                                                    </span>
+                                                    <h6
+                                                        className="display-4 mb-0 font-weight-bold"
+                                                        style={{
+                                                            color: '#1C2331',
+                                                        }}
+                                                    >
+                                                        {weather?.main.temp}{' '}
+                                                        &deg;C
+                                                        <br />
+                                                    </h6>
+                                                    <span
+                                                        className="small"
+                                                        style={{
+                                                            color: '#868B94',
+                                                        }}
+                                                    >
+                                                        {
+                                                            weather?.weather[0]
+                                                                ?.main
+                                                        }
+                                                    </span>
+                                                </div>
 
-                                            <div className="d-flex align-items-center">
-                                                <div
-                                                    className="flex-grow-1"
-                                                    style={{
-                                                        fontSize: '1rem',
-                                                    }}
-                                                >
-                                                    <div>
-                                                        <i
-                                                            className="fas fa-wind fa-fw"
-                                                            style={{
-                                                                color: '#868B94',
-                                                            }}
-                                                        />
-                                                        <span className="ms-1">
-                                                            <Wind />
-                                                            {
-                                                                weather?.wind
-                                                                    .speed
-                                                            }
-                                                            m/s
-                                                        </span>
+                                                <div className="d-flex align-items-center">
+                                                    <div
+                                                        className="flex-grow-1"
+                                                        style={{
+                                                            fontSize: '1rem',
+                                                        }}
+                                                    >
+                                                        <div>
+                                                            <i
+                                                                className="fas fa-wind fa-fw"
+                                                                style={{
+                                                                    color: '#868B94',
+                                                                }}
+                                                            />
+                                                            <span className="ms-1">
+                                                                <Wind />
+                                                                {
+                                                                    weather
+                                                                        ?.wind
+                                                                        .speed
+                                                                }
+                                                                m/s
+                                                            </span>
+                                                        </div>
+                                                        <div>
+                                                            <i
+                                                                className="fas fa-tint fa-fw"
+                                                                style={{
+                                                                    color: '#868B94',
+                                                                }}
+                                                            />
+                                                            <span className="ms-1">
+                                                                {
+                                                                    weather
+                                                                        ?.main
+                                                                        .humidity
+                                                                }
+                                                                %
+                                                            </span>
+                                                        </div>
+                                                        <div>
+                                                            <i
+                                                                className="fas fa-sun fa-fw"
+                                                                style={{
+                                                                    color: '#868B94',
+                                                                }}
+                                                            />
+                                                            <span className="ms-1">
+                                                                {`${
+                                                                    Number(
+                                                                        weather?.visibility
+                                                                    ) / 1000
+                                                                } km`}
+                                                            </span>
+                                                        </div>
                                                     </div>
                                                     <div>
-                                                        <i
-                                                            className="fas fa-tint fa-fw"
-                                                            style={{
-                                                                color: '#868B94',
-                                                            }}
+                                                        <img
+                                                            src={`http://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`}
+                                                            alt=""
+                                                            width="100px"
                                                         />
-                                                        <span className="ms-1">
-                                                            {
-                                                                weather?.main
-                                                                    .humidity
-                                                            }
-                                                            %
-                                                        </span>
                                                     </div>
-                                                    <div>
-                                                        <i
-                                                            className="fas fa-sun fa-fw"
-                                                            style={{
-                                                                color: '#868B94',
-                                                            }}
-                                                        />
-                                                        <span className="ms-1">
-                                                            0.2h
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <img
-                                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
-                                                        alt=""
-                                                        width="100px"
-                                                    />
                                                 </div>
                                             </div>
-                                        </div>
+                                        ) : (
+                                            <div className="card-body p-4">
+                                                <span className="text-danger">
+                                                    Failed to fetch address
+                                                    information for your
+                                                    geolocation. Please search
+                                                    for any city to get weather
+                                                    forecast!!
+                                                </span>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
