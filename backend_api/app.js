@@ -5,8 +5,10 @@ const app = express()
 const dotenv = require('dotenv')
 const path = require('path')
 const errorHandler = require('./middleware/error')
+const useRedis = require('./controllers/redis.controller')
 require('colors')
 
+useRedis.connectToRedis()
 // Load enviroment variables
 dotenv.config({ path: './config/config.env' })
 
