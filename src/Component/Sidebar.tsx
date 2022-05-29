@@ -1,11 +1,32 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import moment from 'moment'
 import sky from '../assets/images/clear_sky.jpg'
 import rainy from '../assets/images/rainy.jpg'
 import sunny from '../assets/images/sunny.jpg'
 import ToggleSwitch from './toggle'
+import { useAppDispatch, useAppSelector } from '../app/hook'
+import getWeathers from '../app/features/weatherApi'
+import { Wind } from '../assets/icons'
 
-function Sidebar() {
+interface SidebarPropsI {
+    coordinates: {
+        latitude: number
+        longitude: number
+    } | null
+}
+
+function Sidebar(props: SidebarPropsI) {
+    const { coordinates } = props
+    const dispatch = useAppDispatch()
+    const { weather } = useAppSelector((state) => state.weather)
+    console.log(weather)
+
+    useEffect(() => {
+        if (coordinates) {
+            dispatch(getWeathers(coordinates))
+        }
+    }, [coordinates])
+
     const todayDate = moment().format('dddd, LL | h:m')
     const weatherBackground = [
         { id: 1, name: 'Clear Sky', image: sky },
@@ -51,7 +72,7 @@ function Sidebar() {
                                             </div>
                                             <div className="d-flex flex-column text-center mt-2 mb-4">
                                                 <span className="display-6">
-                                                    Kathmandu
+                                                    {weather?.name}
                                                 </span>
                                                 <h6
                                                     className="display-4 mb-0 font-weight-bold"
@@ -59,7 +80,7 @@ function Sidebar() {
                                                         color: '#1C2331',
                                                     }}
                                                 >
-                                                    13°C
+                                                    {weather?.main.temp} &deg;C
                                                     <br />
                                                 </h6>
                                                 <span
@@ -68,7 +89,7 @@ function Sidebar() {
                                                         color: '#868B94',
                                                     }}
                                                 >
-                                                    Stormy
+                                                    {weather?.weather[0]?.main}
                                                 </span>
                                             </div>
 
@@ -87,7 +108,12 @@ function Sidebar() {
                                                             }}
                                                         />
                                                         <span className="ms-1">
-                                                            40 km/h
+                                                            <Wind />
+                                                            {
+                                                                weather?.wind
+                                                                    .speed
+                                                            }
+                                                            m/s
                                                         </span>
                                                     </div>
                                                     <div>
@@ -98,7 +124,11 @@ function Sidebar() {
                                                             }}
                                                         />
                                                         <span className="ms-1">
-                                                            84%
+                                                            {
+                                                                weather?.main
+                                                                    .humidity
+                                                            }
+                                                            %
                                                         </span>
                                                     </div>
                                                     <div>

@@ -1,5 +1,6 @@
 const express = require('express')
 const morgan = require('morgan')
+const cors = require('cors')
 const app = express()
 const dotenv = require('dotenv')
 const path = require('path')
@@ -18,6 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 //Morgan for logging
 app.use(morgan('dev'))
+app.use(cors('*'))
 
 // Routes
 app.use('/api/v1', require('./routes/api.routes'))

@@ -1,11 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { WeatherDataState } from './weather'
 import getWeathers from './weatherApi'
 
-const initialState: any = {
+export interface InitialStatePropsI {
+    loading: boolean
+    weather: WeatherDataState | null
+    message: string
+}
+const initialState: InitialStatePropsI = {
     loading: false,
-    weather: {
-        users: [],
-    },
+    weather: null,
+    message: '',
 }
 
 const weatherSlice = createSlice({
@@ -19,11 +24,11 @@ const weatherSlice = createSlice({
         })
         builder.addCase(getWeathers.fulfilled, (state, action) => {
             state.loading = false
-            state.weather = action.payload
+            state.weather = action.payload.data
         })
         builder.addCase(getWeathers.rejected, (state, action) => {
             state.loading = false
-            state.weather = action.payload
+            // state.weather = action.payload
         })
     },
 })
