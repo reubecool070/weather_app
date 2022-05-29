@@ -25,8 +25,24 @@ const getCache = async (key) => {
     return JSON.parse(cache)
 }
 
+const delCache = async (key) => {
+    const del = await clientInstance.del(key)
+    if (del) {
+        console.log(`${key} deleted from cache`)
+    }
+}
+
+const flushAll = async () => {
+    const flushed = await clientInstance.flushAll()
+    if (flushed) {
+        console.log('cache cleared')
+    }
+}
+
 module.exports = {
     connectToRedis,
     setCache,
     getCache,
+    flushAll,
+    delCache,
 }

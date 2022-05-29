@@ -1,8 +1,12 @@
 const express = require('express')
-const { weather } = require('../controllers/weather')
+const {
+    historyWeather,
+    weatherByCoordinates,
+} = require('../controllers/weather')
 
 const router = express.Router()
 
-router.route('/weather').get(weather)
+router.route('/weather').get(weatherByCoordinates)
+router.route('/historyWeather').get(historyWeather)
 
 module.exports = router
