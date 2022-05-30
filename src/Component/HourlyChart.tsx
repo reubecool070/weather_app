@@ -26,14 +26,16 @@ function HourlyChart(props: CoordinatesTypes) {
     const [castHour, setCastHour] = useState(hour[2])
 
     useEffect(() => {
-        dispatch(
-            getHourlyForecast({
-                lat: 27.717,
-                lon: 85.324,
-                cnt: 24,
-            })
-        )
-    }, [])
+        if (lat && lon) {
+            dispatch(
+                getHourlyForecast({
+                    lat,
+                    lon,
+                    cnt: 24,
+                })
+            )
+        }
+    }, [lat, lon])
 
     const chart = forecast?.list.map((item) => {
         return {
@@ -56,7 +58,6 @@ function HourlyChart(props: CoordinatesTypes) {
         }
     }
 
-    console.log(forecast?.list.length)
     return (
         // Graph Card Section
         <div className="d-flex  align-items-center mt-15 mb-15">

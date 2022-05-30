@@ -33,7 +33,7 @@ function App() {
             <Sidebar lat={coordinates?.lat} lon={coordinates?.lon} />
             <div className="right-bar">
                 <Header />
-                <CountryWise />
+                <CountryWise lat={coordinates?.lat} lon={coordinates?.lon} />
                 <HourlyChart lat={coordinates?.lat} lon={coordinates?.lon} />
             </div>
         </div>

@@ -9,31 +9,34 @@ import { useAppDispatch, useAppSelector } from '../app/hook'
 import { IconCalendar } from '../assets/icons'
 import { unitChecker } from '../utils'
 import { CustomAsyncSelect } from './Common/CustomSelect'
+import { CoordinatesTypes } from './types'
 import { weatherBackground } from './weatherImages'
 
-function CountryWise() {
+function CountryWise(props: CoordinatesTypes) {
     const dispatch = useAppDispatch()
+    const { lat, lon } = props
     const { history } = useAppSelector((state) => state.history)
     const { units } = useAppSelector((state) => state.units)
 
     const [coordinates, setCoordinates] = useState<{
         lat: number
         lon: number
-    }>({
-        lat: 27.708317,
-        lon: 85.3205817,
-    })
+    }>()
+    const [errorMessage, setErrorMessage] = useState('')
+
     const [date, setDate] = useState(moment())
 
     useEffect(() => {
-        const payload = {
-            dt: Math.floor(new Date().getTime() / 1000),
-            lat: coordinates.lat,
-            lon: coordinates.lon,
-            units,
+        if (lat && lon) {
+            const payload = {
+                dt: Math.floor(new Date().getTime() / 1000),
+                lat,
+                lon,
+                units,
+            }
+            dispatch(getHistoryWeather(payload))
         }
-        dispatch(getHistoryWeather(payload))
-    }, [])
+    }, [lat, lon])
 
     const promiseOptions = async (inputValue: string, callback: any) => {
         const res = await new Promise<any>((resolve) => {
@@ -73,6 +76,8 @@ function CountryWise() {
                 units,
             }
             dispatch(getHistoryWeather(payload))
+        } else {
+            setErrorMessage('Location cannot be blank')
         }
     }
 
@@ -97,6 +102,7 @@ function CountryWise() {
                     <div className="col-lg-6 col-md-6 ">
                         <div className="d-grid flex-column gap-4 px-4 py-4">
                             <CustomAsyncSelect
+                                placeholder="Search Location..."
                                 options={getData}
                                 onChange={handleCityChange}
                             />
@@ -128,48 +134,55 @@ function CountryWise() {
                                     Search
                                 </button>
                             </div>
+
+                            <span className="text-danger">{errorMessage}</span>
                         </div>
                     </div>
-                    <div className="col-lg-6 col-md-6 card custom-card  text-white">
-                        <div className="d-flex justify-content-center">
-                            <div className="flex-column px-3 mt-3 mb-3">
-                                <h1 className="large-font mr-3">
-                                    {history &&
-                                        unitChecker(
-                                            history?.current.temp,
-                                            units
-                                        )}
-                                </h1>
-                                <div className="d-flex flex-column mr-3">
-                                    <h2 className="mt-3 mb-0">
-                                        {history?.timezone}
-                                    </h2>
-                                    <small>
-                                        {history?.current.dt
-                                            ? moment(
-                                                  Number(history?.current.dt) *
-                                                      1000
-                                              ).format('LLLL')
-                                            : ''}
-                                    </small>
-                                </div>
+                    {history ? (
+                        <div className="col-lg-6 col-md-6 card custom-card  text-white">
+                            <div className="d-flex justify-content-center">
+                                <div className="flex-column px-3 mt-3 mb-3">
+                                    <h1 className="large-font mr-3">
+                                        {history &&
+                                            unitChecker(
+                                                history?.current.temp,
+                                                units
+                                            )}
+                                    </h1>
+                                    <div className="d-flex flex-column mr-3">
+                                        <h2 className="mt-3 mb-0">
+                                            {history?.timezone}
+                                        </h2>
+                                        <small>
+                                            {history?.current.dt
+                                                ? moment(
+                                                      Number(
+                                                          history?.current.dt
+                                                      ) * 1000
+                                                  ).format('LLLL')
+                                                : ''}
+                                        </small>
+                                    </div>
 
-                                <div className="d-flex flex-row  mt-4 align-items-center gap-3">
-                                    <h3 className="fa fa-sun-o">Weather :</h3>
-                                    <span>
-                                        {history?.current.weather[0]?.main}
-                                    </span>
-                                    <div>
-                                        <img
-                                            src={`http://openweathermap.org/img/wn/${history?.current.weather[0].icon}@2x.png`}
-                                            alt=""
-                                            width="100px"
-                                        />
+                                    <div className="d-flex flex-row  mt-4 align-items-center gap-3">
+                                        <h3 className="fa fa-sun-o">
+                                            Weather :
+                                        </h3>
+                                        <span>
+                                            {history?.current.weather[0]?.main}
+                                        </span>
+                                        <div>
+                                            <img
+                                                src={`http://openweathermap.org/img/wn/${history?.current.weather[0].icon}@2x.png`}
+                                                alt=""
+                                                width="100px"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    ) : null}
                 </div>
             </div>
         </div>
