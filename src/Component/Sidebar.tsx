@@ -3,9 +3,9 @@ import moment from 'moment'
 import { weatherBackground } from './weatherImages'
 import ToggleSwitch from './toggle'
 import { useAppDispatch, useAppSelector } from '../app/hook'
-import getWeathers from '../app/features/weatherApi'
+import getWeathers from '../app/features/weather/weatherApi'
 import { Wind } from '../assets/icons'
-import { changemetric } from '../app/features/unitSlice'
+import { changemetric } from '../app/features/unit/unitSlice'
 import { CoordinatesTypes } from './types'
 
 function Sidebar(props: CoordinatesTypes) {
@@ -55,10 +55,11 @@ function Sidebar(props: CoordinatesTypes) {
                             <div className="row d-flex h-100">
                                 <div className="col-md-12 col-lg-12 col-xl-12">
                                     <div
-                                        className="card shadow-5"
+                                        className="card bg-transparent text-white shadow-5"
                                         style={{
                                             color: '#4B515D',
                                             borderRadius: '35px',
+                                            borderColor: '#ffffff',
                                         }}
                                     >
                                         {lat && lon ? (
@@ -70,22 +71,12 @@ function Sidebar(props: CoordinatesTypes) {
                                                     <span className="display-6">
                                                         {weather?.name}
                                                     </span>
-                                                    <h6
-                                                        className="display-4 mb-0 font-weight-bold"
-                                                        style={{
-                                                            color: '#1C2331',
-                                                        }}
-                                                    >
+                                                    <h6 className="display-4 mb-0 font-weight-bold">
                                                         {weather?.main.temp}{' '}
                                                         &deg;C
                                                         <br />
                                                     </h6>
-                                                    <span
-                                                        className="small"
-                                                        style={{
-                                                            color: '#868B94',
-                                                        }}
-                                                    >
+                                                    <span className="small">
                                                         {
                                                             weather?.weather[0]
                                                                 ?.main
@@ -174,10 +165,11 @@ function Sidebar(props: CoordinatesTypes) {
                             </div>
                             <div className="mt-3">
                                 <div
-                                    className="card text-center"
+                                    className="card bg-transparent text-white text-center"
                                     style={{
                                         color: '#4B515D',
                                         borderRadius: '35px',
+                                        borderColor: '#ffffff',
                                     }}
                                 >
                                     <div

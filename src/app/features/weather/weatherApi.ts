@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import useAxios from '../axios.config'
+import useAxios from '../../axios.config'
 import { WeatherPayloadState } from './weather'
 
 const getWeathers = createAsyncThunk(

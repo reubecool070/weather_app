@@ -22,6 +22,7 @@ function App() {
     useEffect(() => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
+                console.log(position)
                 setCoordinates({
                     lat: position.coords.latitude,
                     lon: position.coords.longitude,

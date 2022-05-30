@@ -18,6 +18,7 @@ exports.weatherByCoordinates = asyncHandler(async (req, res, next) => {
 
             return next(new ErrorResponse(errorMessages, 400))
         }
+        // await flushAll()
 
         if (units === 'metric') {
             cacheWeather = await getCache('coordinates')

@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
-import unitSlice from './features/unitSlice'
-import weatherSlice from './features/weatherSlice'
+import unitSlice from './features/unit/unitSlice'
+import weatherSlice from './features/weather/weatherSlice'
 
 export const store = configureStore({
     reducer: {
