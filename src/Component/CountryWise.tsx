@@ -8,37 +8,36 @@ function CountryWise() {
         <div className="d-flex mt-15 align-items-center mb-15">
             <div className="card-1 col-lg-12 col-md-12">
                 <div className="location-text">Other Location</div>
-                <div className="d-flex flex-row align-items-center">
-                    <div className="col-lg-6 col-md-6">
-                        <div className="flex-column px-3 py-3">
-                            <div className="px-3">
-                                <CustomSelect />
-                            </div>
-                            <div className="px-3 py-5">
-                                <div className="date-time">
-                                    {/* Select Date */}
-                                    <div className="input-wrapper">
-                                        <Datetime
-                                            inputProps={{
-                                                placeholder: 'Select date..',
-                                            }}
-                                            // onChange={(value) =>
-                                            //     handleDateChange(value)
-                                            // }
-                                            // closeOnSelect
-                                            // value={date}
-                                        />
-                                        <div className="input-icon">
-                                            <IconCalendar />
-                                        </div>
+                <div className="d-flex flex-row align-items-center justify-content-center">
+                    <div className="col-lg-6 col-md-6 ">
+                        <div className="d-grid flex-column gap-4 px-4 py-4">
+                            <CustomSelect />
+
+                            <div className="date-time">
+                                {/* Select Date */}
+                                <div className="input-wrapper">
+                                    <Datetime
+                                        inputProps={{
+                                            placeholder: 'Select date..',
+                                        }}
+                                        // onChange={(value) =>
+                                        //     handleDateChange(value)
+                                        // }
+                                        // closeOnSelect
+                                        // value={date}
+                                    />
+                                    <div className="input-icon">
+                                        <IconCalendar />
                                     </div>
-                                    <button
-                                        type="button"
-                                        className="btn btn-primary btn-sm"
-                                    >
-                                        Small button
-                                    </button>
                                 </div>
+                            </div>
+                            <div className="d-grid">
+                                <button
+                                    className="btn btn-primary"
+                                    type="button"
+                                >
+                                    Search
+                                </button>
                             </div>
                         </div>
                     </div>

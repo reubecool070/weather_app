@@ -14,7 +14,7 @@ export const smallSelectStyle = {
         borderColor: '#BFCCDA',
         borderRadius: '3px',
         boxShadow: 'none',
-        backgroundColor: 'transparent',
+        // backgroundColor: 'transparent',
         '&:hover': {
             borderColor: '#fff',
             boxShadow: 'none',
