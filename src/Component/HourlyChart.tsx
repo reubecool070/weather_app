@@ -54,11 +54,13 @@ function HourlyChart(props: CoordinatesTypes) {
             <div className="card-0 col-lg-12 col-md-12 graph-card">
                 <div className="p-3 gap-3 d-flex justify-content-end align-items-center">
                     <span> In hours</span>
-                    <CustomSelect
-                        options={hour}
-                        value={castHour}
-                        onChange={handleHourChange}
-                    />
+                    <div style={{ height: '38px', width: '78px' }}>
+                        <CustomSelect
+                            options={hour}
+                            value={castHour}
+                            onChange={handleHourChange}
+                        />
+                    </div>
                 </div>
                 <div className="p-3">
                     <AreaChart

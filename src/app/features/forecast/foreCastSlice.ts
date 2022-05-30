@@ -23,7 +23,7 @@ const geolocationSlice = createSlice({
         })
         builder.addCase(getHourlyForecast.rejected, (state) => {
             state.loading = false
-            // state.weather = action.payload
+            state.forecast = null
         })
     },
 })

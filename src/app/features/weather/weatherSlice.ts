@@ -23,7 +23,7 @@ const weatherSlice = createSlice({
         })
         builder.addCase(getWeathers.rejected, (state) => {
             state.loading = false
-            // state.weather = action.payload
+            state.weather = null
         })
     },
 })

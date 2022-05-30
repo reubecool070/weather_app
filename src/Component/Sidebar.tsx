@@ -7,19 +7,25 @@ import getWeathers from '../app/features/weather/weatherApi'
 import { changemetric } from '../app/features/unit/unitSlice'
 import { CoordinatesTypes } from './types'
 import TodayCard from './Common/TodayCard'
+import Loader from '../assets/icons/loader'
 
 function Sidebar(props: CoordinatesTypes) {
     const { lat, lon } = props
     const dispatch = useAppDispatch()
-    const { weather } = useAppSelector((state) => state.weather)
+    const { weather, loading } = useAppSelector((state) => state.weather)
     const { units } = useAppSelector((state) => state.units)
+
     useEffect(() => {
+        handleRefresh()
+    }, [lat, lon])
+
+    const todayDate = moment().format('dddd, LL | h:mm a')
+
+    const handleRefresh = () => {
         if (lat && lon) {
             dispatch(getWeathers({ lat, lon, units }))
         }
-    }, [lat, lon])
-
-    const todayDate = moment().format('dddd, LL | h:m')
+    }
 
     const toggleActivityEnabled = () => {
         dispatch(changemetric())
@@ -53,22 +59,26 @@ function Sidebar(props: CoordinatesTypes) {
                         <div className="container py-5 h-100">
                             <div className="row d-flex h-100">
                                 <div className="col-md-12 col-lg-12 col-xl-12">
-                                    <div className="card text-white custom-card  shadow-5">
-                                        {lat && lon ? (
+                                    <div className="card text-white custom-card shadow-5">
+                                        {lat && lon && weather ? (
                                             <TodayCard
                                                 weather={weather}
                                                 todayDate={todayDate}
                                                 units={units}
+                                                handleRefresh={handleRefresh}
                                             />
                                         ) : (
-                                            <div className="card-body p-4">
-                                                <span className="text-danger">
-                                                    Failed to fetch address
-                                                    information for your
-                                                    geolocation. Please search
-                                                    for any city to get weather
-                                                    forecast!!
-                                                </span>
+                                            <div className="p-4">
+                                                {loading ? (
+                                                    <Loader />
+                                                ) : (
+                                                    <span className="text-danger">
+                                                        Failed to fetch address
+                                                        information. Please
+                                                        allow access to
+                                                        geolocation.
+                                                    </span>
+                                                )}
                                             </div>
                                         )}
                                     </div>

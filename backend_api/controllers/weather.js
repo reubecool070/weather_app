@@ -134,7 +134,6 @@ exports.geoLocating = asyncHandler(async (req, res, next) => {
 exports.hourlyWeather = asyncHandler(async (req, res, next) => {
     const errors = validationResult(req.params)
     const { lat, lon, cnt } = req.query
-    console.log(req.query)
     try {
         if (!errors.isEmpty()) {
             const errorMessages = errors

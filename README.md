@@ -8,9 +8,19 @@ In the project directory, you can run:
 
 ### `npm install`
 
+### `npm install --force` if necessary
+
 Install all packages for frontend
 
 ### `npm start`
+
+### `npm run format`
+
+if eslint or prettier problem, run this command:
+
+### `npm run format`
+
+### `npm run lint-fix`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -21,6 +31,8 @@ You will also see any lint errors in the console.
 ### `cd backend_api`
 
 ### `npm install`
+
+### `npm install --force` if necessary
 
 Install all packages for backend
 
@@ -51,11 +63,11 @@ A quick look at the top-level files and directories in this weather-app project.
         ├── axios.config.ts
         ├── hook.ts
         ├── store.ts
-    ├──	assets
+ ├──	assets
         ├── css
         ├── icons
         ├── images
-    ├── Component
+ ├── Component
         ├── Common
  ├── data
  ├── utils

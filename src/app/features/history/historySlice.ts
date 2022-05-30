@@ -24,7 +24,7 @@ const geolocationSlice = createSlice({
         })
         builder.addCase(getHistoryWeather.rejected, (state) => {
             state.loading = false
-            // state.weather = action.payload
+            state.history = null
         })
     },
 })

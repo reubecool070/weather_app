@@ -7,6 +7,7 @@ import getLocation from '../app/features/geolocation/geolocationApi'
 import getHistoryWeather from '../app/features/history/historyApi'
 import { useAppDispatch, useAppSelector } from '../app/hook'
 import { IconCalendar } from '../assets/icons'
+import Loader from '../assets/icons/loader'
 import { unitChecker } from '../utils'
 import { CustomAsyncSelect } from './Common/CustomSelect'
 import { CoordinatesTypes } from './types'
@@ -15,7 +16,7 @@ import { weatherBackground } from './weatherImages'
 function CountryWise(props: CoordinatesTypes) {
     const dispatch = useAppDispatch()
     const { lat, lon } = props
-    const { history } = useAppSelector((state) => state.history)
+    const { history, loading } = useAppSelector((state) => state.history)
     const { units } = useAppSelector((state) => state.units)
 
     const [coordinates, setCoordinates] = useState<{
@@ -60,6 +61,7 @@ function CountryWise(props: CoordinatesTypes) {
 
     const handleCityChange = (e: any) => {
         setCoordinates(e.value)
+        setErrorMessage('')
     }
 
     const handleDateChange = (value: any) => {
@@ -75,6 +77,7 @@ function CountryWise(props: CoordinatesTypes) {
                 lon: coordinates.lon,
                 units,
             }
+
             dispatch(getHistoryWeather(payload))
         } else {
             setErrorMessage('Location cannot be blank')
@@ -182,6 +185,8 @@ function CountryWise(props: CoordinatesTypes) {
                                 </div>
                             </div>
                         </div>
+                    ) : loading ? (
+                        <Loader />
                     ) : null}
                 </div>
             </div>

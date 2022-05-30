@@ -1,14 +1,18 @@
 import React from 'react'
-import { EyeIcon, IconHumidity, Wind } from '../../assets/icons'
+import { EyeIcon, IconHumidity, RefreshIcon, Wind } from '../../assets/icons'
 import { unitChecker } from '../../utils'
+import { TodayPropsI } from '../types'
 
-function TodayCard(props: any) {
-    const { weather, todayDate, units } = props
+function TodayCard(props: TodayPropsI) {
+    const { weather, todayDate, units, handleRefresh } = props
 
     return (
         <div className="card-body p-4">
-            <div className="d-flex justify-content-center">
+            <div className="d-flex justify-content-between">
                 <h6>{todayDate}</h6>
+                <span onClick={() => handleRefresh()} role="presentation">
+                    <RefreshIcon />
+                </span>
             </div>
             <div className="d-flex flex-column text-center mt-2 mb-4">
                 <span className="display-6">{weather?.name}</span>
@@ -34,12 +38,6 @@ function TodayCard(props: any) {
                         </span>
                     </div>
                     <div>
-                        <i
-                            className="fas fa-tint fa-fw"
-                            style={{
-                                color: '#868B94',
-                            }}
-                        />
                         <IconHumidity />
                         <span className="ms-1">{weather?.main?.humidity}%</span>
                     </div>
@@ -52,7 +50,7 @@ function TodayCard(props: any) {
                 </div>
                 <div>
                     <img
-                        src={`http://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`}
+                        src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`}
                         alt=""
                         width="100px"
                     />
