@@ -1,4 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
+import geolocationSlice from './features/geolocation/geolocationSlice'
+import historySlice from './features/history/historySlice'
 import unitSlice from './features/unit/unitSlice'
 import weatherSlice from './features/weather/weatherSlice'
 
@@ -6,6 +8,8 @@ export const store = configureStore({
     reducer: {
         weather: weatherSlice,
         units: unitSlice,
+        geoLocation: geolocationSlice,
+        history: historySlice,
     },
 })
 

@@ -3,6 +3,13 @@ export interface WeatherPayloadState {
     lon: number
     units: string
 }
+
+export interface InitialStatePropsI {
+    loading: boolean
+    weather: WeatherDataState | null
+    message: string
+}
+
 export interface WeatherDataState {
     coord: {
         lon: number

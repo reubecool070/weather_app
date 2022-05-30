@@ -7,18 +7,18 @@ import getWeathers from '../app/features/weather/weatherApi'
 import { Wind } from '../assets/icons'
 import { changemetric } from '../app/features/unit/unitSlice'
 import { CoordinatesTypes } from './types'
+import TodayCard from './Common/TodayCard'
 
 function Sidebar(props: CoordinatesTypes) {
     const { lat, lon } = props
     const dispatch = useAppDispatch()
     const { weather } = useAppSelector((state) => state.weather)
     const { units } = useAppSelector((state) => state.units)
-
     useEffect(() => {
         if (lat && lon) {
             dispatch(getWeathers({ lat, lon, units }))
         }
-    }, [lat, lon, units])
+    }, [lat, lon])
 
     const todayDate = moment().format('dddd, LL | h:m')
 
@@ -30,13 +30,13 @@ function Sidebar(props: CoordinatesTypes) {
         <aside
             className="left-sidebar ishovered justify-content-center"
             style={{
-                background: `url(${
-                    weatherBackground.find(
-                        (item) =>
-                            weather &&
-                            item.name.includes(weather?.weather[0]?.main)
-                    )?.image
-                })`,
+                backgroundImage: weather?.weather?.length
+                    ? `url(${
+                          weatherBackground.find((item) =>
+                              item.name.includes(weather?.weather[0]?.main)
+                          )?.image
+                      })`
+                    : '',
                 backgroundSize: 'cover',
             }}
         >
@@ -54,101 +54,13 @@ function Sidebar(props: CoordinatesTypes) {
                         <div className="container py-5 h-100">
                             <div className="row d-flex h-100">
                                 <div className="col-md-12 col-lg-12 col-xl-12">
-                                    <div
-                                        className="card bg-transparent text-white shadow-5"
-                                        style={{
-                                            color: '#4B515D',
-                                            borderRadius: '35px',
-                                            borderColor: '#ffffff',
-                                        }}
-                                    >
+                                    <div className="card text-white custom-card  shadow-5">
                                         {lat && lon ? (
-                                            <div className="card-body p-4">
-                                                <div className="d-flex justify-content-center">
-                                                    <h6>{todayDate}</h6>
-                                                </div>
-                                                <div className="d-flex flex-column text-center mt-2 mb-4">
-                                                    <span className="display-6">
-                                                        {weather?.name}
-                                                    </span>
-                                                    <h6 className="display-4 mb-0 font-weight-bold">
-                                                        {weather?.main.temp}{' '}
-                                                        &deg;C
-                                                        <br />
-                                                    </h6>
-                                                    <span className="small">
-                                                        {
-                                                            weather?.weather[0]
-                                                                ?.main
-                                                        }
-                                                    </span>
-                                                </div>
-
-                                                <div className="d-flex align-items-center">
-                                                    <div
-                                                        className="flex-grow-1"
-                                                        style={{
-                                                            fontSize: '1rem',
-                                                        }}
-                                                    >
-                                                        <div>
-                                                            <i
-                                                                className="fas fa-wind fa-fw"
-                                                                style={{
-                                                                    color: '#868B94',
-                                                                }}
-                                                            />
-                                                            <span className="ms-1">
-                                                                <Wind />
-                                                                {
-                                                                    weather
-                                                                        ?.wind
-                                                                        .speed
-                                                                }
-                                                                m/s
-                                                            </span>
-                                                        </div>
-                                                        <div>
-                                                            <i
-                                                                className="fas fa-tint fa-fw"
-                                                                style={{
-                                                                    color: '#868B94',
-                                                                }}
-                                                            />
-                                                            <span className="ms-1">
-                                                                {
-                                                                    weather
-                                                                        ?.main
-                                                                        .humidity
-                                                                }
-                                                                %
-                                                            </span>
-                                                        </div>
-                                                        <div>
-                                                            <i
-                                                                className="fas fa-sun fa-fw"
-                                                                style={{
-                                                                    color: '#868B94',
-                                                                }}
-                                                            />
-                                                            <span className="ms-1">
-                                                                {`${
-                                                                    Number(
-                                                                        weather?.visibility
-                                                                    ) / 1000
-                                                                } km`}
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <img
-                                                            src={`http://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`}
-                                                            alt=""
-                                                            width="100px"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <TodayCard
+                                                weather={weather}
+                                                todayDate={todayDate}
+                                                units={units}
+                                            />
                                         ) : (
                                             <div className="card-body p-4">
                                                 <span className="text-danger">
@@ -164,14 +76,7 @@ function Sidebar(props: CoordinatesTypes) {
                                 </div>
                             </div>
                             <div className="mt-3">
-                                <div
-                                    className="card bg-transparent text-white text-center"
-                                    style={{
-                                        color: '#4B515D',
-                                        borderRadius: '35px',
-                                        borderColor: '#ffffff',
-                                    }}
-                                >
+                                <div className="card custom-card text-white text-center">
                                     <div
                                         className="card-body d-flex flex-row 
                                             justify-content-center align-items-center"

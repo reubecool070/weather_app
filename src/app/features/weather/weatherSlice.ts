@@ -1,12 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { WeatherDataState } from './weather'
+import { InitialStatePropsI } from './weather'
 import getWeathers from './weatherApi'
 
-export interface InitialStatePropsI {
-    loading: boolean
-    weather: WeatherDataState | null
-    message: string
-}
 const initialState: InitialStatePropsI = {
     loading: false,
     weather: null,

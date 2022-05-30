@@ -46,3 +46,8 @@
     height: 1px;
     background-color: #b0bec5;
 }
+.custom-card {
+    color: #4b515d;
+    border-radius: 35px;
+    background-color: rgba(0, 0, 0, 0.5);
+}

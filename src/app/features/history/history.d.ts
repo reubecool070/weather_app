@@ -34,3 +34,9 @@ export interface historyPayloadState {
     units: string
     dt: number
 }
+
+export interface InitialStatePropsI {
+    loading: boolean
+    history: historyState | null
+    message: string
+}

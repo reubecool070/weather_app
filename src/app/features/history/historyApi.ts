@@ -2,8 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import useAxios from '../../axios.config'
 import { historyPayloadState } from './history'
 
-const getWeathers = createAsyncThunk(
-    'weather',
+const getHistoryWeather = createAsyncThunk(
+    'history',
     async (coordinates: historyPayloadState) => {
         const { lat, lon, units, dt } = coordinates
 
@@ -14,4 +14,4 @@ const getWeathers = createAsyncThunk(
     }
 )
 
-export default getWeathers
+export default getHistoryWeather
