@@ -127,6 +127,32 @@ exports.geoLocating = asyncHandler(async (req, res, next) => {
             status: true,
         })
     } catch (error) {
-        return res.status(401).json({ mmessage: error.message })
+        return res.status(401).json({ message: error.message })
+    }
+})
+
+exports.hourlyWeather = asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req.params)
+    const { lat, lon, cnt } = req.query
+    console.log(req.query)
+    try {
+        if (!errors.isEmpty()) {
+            const errorMessages = errors
+                .array()
+                .map((error) => error.msg)
+                .join(', ')
+
+            return next(new ErrorResponse(errorMessages, 400))
+        }
+        const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${process.env.WEATHER_API_KEY}&units=metric&cnt=${cnt}`
+        const response = await axios.get(url)
+
+        return res.status(200).json({
+            data: response.data,
+            message: 'Location fetched successfully',
+            status: true,
+        })
+    } catch (error) {
+        return res.status(401).json({ message: error.message })
     }
 })

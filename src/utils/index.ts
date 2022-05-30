@@ -7,3 +7,13 @@ export const unitChecker = (value: number, unit: string) => {
             return `${value}°C`
     }
 }
+
+export const unitConversion = (value: number, unit: string) => {
+    switch (unit) {
+        case 'imperial':
+            return ((value * 9) / 5 + 32).toFixed(1)
+
+        default:
+            return value
+    }
+}

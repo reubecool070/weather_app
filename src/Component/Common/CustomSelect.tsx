@@ -1,5 +1,6 @@
 import React from 'react'
 import AsyncSelect from 'react-select/async'
+import Select from 'react-select'
 
 export const smallSelectStyle = {
     control: (base: any) => ({
@@ -49,22 +50,32 @@ export const smallSelectStyle = {
     }),
 }
 
-function CustomSelect(props: any) {
+export function CustomAsyncSelect(props: any) {
     const { options, onChange, onInputChange } = props
     return (
-        <div>
-            <AsyncSelect
-                styles={smallSelectStyle}
-                cacheOptions
-                loadOptions={options}
-                // defaultOptions
-                onInputChange={onInputChange}
-                name="options"
-                onChange={onChange}
-                placeholder="Search..."
-            />
-        </div>
+        <AsyncSelect
+            styles={smallSelectStyle}
+            cacheOptions
+            loadOptions={options}
+            // defaultOptions
+            onInputChange={onInputChange}
+            name="options"
+            onChange={onChange}
+            placeholder="Search..."
+        />
     )
 }
 
-export default CustomSelect
+export function CustomSelect(props: any) {
+    const { onChange, options, value, className } = props
+
+    return (
+        <Select
+            className={className}
+            onChange={onChange}
+            value={value}
+            styles={smallSelectStyle}
+            options={options}
+        />
+    )
+}

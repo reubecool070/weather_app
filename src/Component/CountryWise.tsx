@@ -8,7 +8,7 @@ import getHistoryWeather from '../app/features/history/historyApi'
 import { useAppDispatch, useAppSelector } from '../app/hook'
 import { IconCalendar } from '../assets/icons'
 import { unitChecker } from '../utils'
-import CustomSelect from './Common/CustomSelect'
+import { CustomAsyncSelect } from './Common/CustomSelect'
 import { weatherBackground } from './weatherImages'
 
 function CountryWise() {
@@ -93,11 +93,10 @@ function CountryWise() {
                     backgroundSize: 'cover',
                 }}
             >
-                <div className="location-text">Other Location</div>
                 <div className="d-flex flex-row align-items-center justify-content-center">
                     <div className="col-lg-6 col-md-6 ">
                         <div className="d-grid flex-column gap-4 px-4 py-4">
-                            <CustomSelect
+                            <CustomAsyncSelect
                                 options={getData}
                                 onChange={handleCityChange}
                             />

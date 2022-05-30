@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
+import foreCastSlice from './features/forecast/foreCastSlice'
 import geolocationSlice from './features/geolocation/geolocationSlice'
 import historySlice from './features/history/historySlice'
 import unitSlice from './features/unit/unitSlice'
@@ -10,6 +11,7 @@ export const store = configureStore({
         units: unitSlice,
         geoLocation: geolocationSlice,
         history: historySlice,
+        forecast: foreCastSlice,
     },
 })
 

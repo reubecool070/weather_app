@@ -2,14 +2,11 @@ import React from 'react'
 
 function Header() {
     return (
-        <div className="topbar">
-            <nav className="navbar top-navbar navbar-expand-md navbar-light px-3">
-                <div className="filter-row d-flex align-items-center ml-5">
-                    Search
-                    {/* Search */}
-                    {/* Filter */}
-                </div>
-            </nav>
+        <div className="d-flex flex-column">
+            <div className="font-20 fw-bolder ">Welcome Back !!!</div>
+            <div className="welcome-paragraph">
+                Check Out today&apos;s weather information
+            </div>
         </div>
     )
 }
