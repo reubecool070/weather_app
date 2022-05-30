@@ -46,7 +46,7 @@ A quick look at the top-level files and directories in this weather-app project.
 	├── app.js
 ├── public
 ├── src
-	├── app
+ ├── app
         ├── features
         ├── axios.config.ts
         ├── hook.ts
@@ -57,10 +57,10 @@ A quick look at the top-level files and directories in this weather-app project.
         ├── images
     ├── Component
         ├── Common
-	├── data
-	├── utils
-	├── App.tsx
-	├── index.tsx
+ ├── data
+ ├── utils
+ ├── App.tsx
+ ├── index.tsx
 ```
 
 ## 😢 Challenges
