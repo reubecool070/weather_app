@@ -17,4 +17,4 @@ The application provides an option to browse the weather according to location, 
 The application displays the hourly temperature trend from the past X hours in a graph.
 The use must be able to change the number of hours. The default value should be 24 hours:
 - http://api.openweathermap.org/data/2.5/forecast?q=London&appid=b1b15e88fa797225412429c1c50c122a1&units=metric&cnt=24
-https://openweathermap.org/data/2.5/onecall?lat=51.5085&lon=-0.1257&units=metric&appid=439d4b804bc8187953eb36d2a8c26a02
+

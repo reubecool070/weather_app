@@ -14,30 +14,53 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
+### `cd backend_api`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `sudo apt install redis-server` // for redis in ubuntu
 
-### `npm run build`
+For more info about install of redis, Open: (https://redis.io/docs/getting-started/installation/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `npm run dev`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Launches the backend.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🧐 What's inside?
 
-### `npm run eject`
+A quick look at the top-level files and directories in this weather-react project.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+├── backend_api
+	├── config
+	├── controllers
+	├── middleware
+	├── routes
+	├── utils
+	├── app.js
+├── public
+├── src
+	├── app
+       ├── features
+       ├── axios.config.ts
+       ├── hook.ts
+       ├── store.ts
+	├──	assets
+       ├── css
+       ├── icons
+       ├── images
+	├── Component
+       ├── Common
+	├── data
+	├── utils
+	├── App.tsx
+	├── index.tsx
+├── tailwind.config.js
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 😢 Challenges
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+-   The first and biggest challenges of the project was to find the right api, I used the OpenWeatherMap API to fetch the weather forecast data. However, it was hard to find the right api for the hourly based forecast and also the api based on location and time i.e. So I used 5-day forecast data only i.e. _when a user on 30th March 2022 at 7:00 PM EST tries to fetch 5-day forecast data, will get forecast data till 25th March 2020 at 12:00 AM UTC._ And hourly based api provides data for only 40 hours.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+-   Second challenge was using redis cache for api like weather which data that needs to be updated every once in a while. So I used for current weather data only.
 
 ## Learn More
 
