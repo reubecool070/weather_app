@@ -6,6 +6,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `npm install`
+
+Install all packages for frontend
+
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -16,9 +20,13 @@ You will also see any lint errors in the console.
 
 ### `cd backend_api`
 
+### `npm install`
+
+Install all packages for backend
+
 ### `sudo apt install redis-server` // for redis in ubuntu
 
-For more info about install of redis, Open: (https://redis.io/docs/getting-started/installation/)
+For more info about installation of redis, Open: (https://redis.io/docs/getting-started/installation/)
 
 ### `npm run dev`
 
@@ -26,7 +34,7 @@ Launches the backend.
 
 ## 🧐 What's inside?
 
-A quick look at the top-level files and directories in this weather-react project.
+A quick look at the top-level files and directories in this weather-app project.
 
 ```
 ├── backend_api
