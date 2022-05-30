@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import getLocation from './geolocationApi'
-import { InitialStatePropsI, locationDataState } from './geolocation'
+import { InitialStatePropsI } from './geolocation'
 
 const initialState: InitialStatePropsI = {
     loading: false,
@@ -14,14 +14,14 @@ const geolocationSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         // get weathers list api
-        builder.addCase(getLocation.pending, (state, action) => {
+        builder.addCase(getLocation.pending, (state) => {
             state.loading = true
         })
         builder.addCase(getLocation.fulfilled, (state, action) => {
             state.loading = false
             state.geoLocation = action.payload.data
         })
-        builder.addCase(getLocation.rejected, (state, action) => {
+        builder.addCase(getLocation.rejected, (state) => {
             state.loading = false
             // state.weather = action.payload
         })

@@ -1,16 +1,6 @@
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
-import {
-    LineChart,
-    Line,
-    CartesianGrid,
-    XAxis,
-    YAxis,
-    Tooltip,
-    AreaChart,
-    Area,
-    Label,
-} from 'recharts'
+import { CartesianGrid, XAxis, YAxis, Tooltip, AreaChart, Area } from 'recharts'
 import getHourlyForecast from '../app/features/forecast/forecastApi'
 import { useAppDispatch, useAppSelector } from '../app/hook'
 import { hour } from '../data'

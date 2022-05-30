@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { InitialStatePropsI } from './weather'
 import getWeathers from './weatherApi'
 
@@ -14,14 +14,14 @@ const weatherSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         // get weathers list api
-        builder.addCase(getWeathers.pending, (state, action) => {
+        builder.addCase(getWeathers.pending, (state) => {
             state.loading = true
         })
         builder.addCase(getWeathers.fulfilled, (state, action) => {
             state.loading = false
             state.weather = action.payload.data
         })
-        builder.addCase(getWeathers.rejected, (state, action) => {
+        builder.addCase(getWeathers.rejected, (state) => {
             state.loading = false
             // state.weather = action.payload
         })

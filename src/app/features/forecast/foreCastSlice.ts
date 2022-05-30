@@ -14,14 +14,14 @@ const geolocationSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         // get weathers list api
-        builder.addCase(getHourlyForecast.pending, (state, action) => {
+        builder.addCase(getHourlyForecast.pending, (state) => {
             state.loading = true
         })
         builder.addCase(getHourlyForecast.fulfilled, (state, action) => {
             state.loading = false
             state.forecast = action.payload.data
         })
-        builder.addCase(getHourlyForecast.rejected, (state, action) => {
+        builder.addCase(getHourlyForecast.rejected, (state) => {
             state.loading = false
             // state.weather = action.payload
         })
